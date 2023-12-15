@@ -73,7 +73,7 @@ public class Server {
 		frmYachtDiceServer.getContentPane().add(textPortNum);
 		textPortNum.setColumns(10);
 		
-		JButton serverStart = new JButton("START");
+		final JButton serverStart = new JButton("START");
 		
 		serverStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

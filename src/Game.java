@@ -21,7 +21,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.SwingConstants;
 
 public class Game {
-
+	
 	private JFrame frmYachtDice;
 	private JTextField txtInput;
 	private String UserName;
@@ -38,13 +38,19 @@ public class Game {
     private OutputStream os;
     private DataInputStream dis;
     private DataOutputStream dos;
-
+	
+    final int WATING = 1;
+	final int PLAYING = 2;
+	final int OPEN = 3;
+	final int RESULT = 4;
+	BGM bgm = new BGM();
+    
 	/**
 	 * Create the application.
 	 */
 	public Game(String name, String ip, String port) {
 		initialize();
-		
+		bgm.playBGM(WATING);
 		//AppendText("User " + name + " connecting " + ip + " " + port + "\n");
 		AppendText(name + "님이 입장하였습니다.\nip: " + ip + " , port: " + port + "\n");
 		UserName = name;
@@ -185,6 +191,23 @@ public class Game {
 		showInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Instructions();
+			}
+		});
+		
+		gameStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				String playerID;
+				if (UserName == player1.getText())
+					playerID="player1";
+				else playerID="player2";
+				playerID = player2_wait.getText(u[0].trim());
+		    	SendMessage("System : " + playerID + "게임 준비");
+		    	*/
+				SendMessage("게임 준비");
+		    	bgm.playBGM(PLAYING);
+		    	playGame();
+		    	gameStart.setEnabled(false);
 			}
 		});
 		
@@ -344,5 +367,17 @@ public class Game {
                 System.exit(0);
             }
         }
+    }
+    
+    private void playGame() {
+    	int player1_remaining_turn = 12, player2_remaining_turn = 12;
+    	int player1_upper = 0, player1_lower = 0, player1_sum=0;
+    	int player2_upper = 0, player2_lower = 0, player2_sum = 0;
+    	
+    }
+    
+    private void turn(int remaining_turn) {
+    	
+    	
     }
 }

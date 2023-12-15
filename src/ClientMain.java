@@ -32,14 +32,12 @@ public class ClientMain {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
 	public ClientMain() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
