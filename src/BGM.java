@@ -4,8 +4,13 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.io.*;
 public class BGM{
+	private Clip activeClip;
+	boolean isPlay = false;
+	
 	public void playBGM(int situation) {
 		File musicPath = null;
+		if(isPlay)
+			activeClip.stop();
 		try {
 			System.out.println(situation);
 			switch(situation) {
@@ -17,18 +22,21 @@ public class BGM{
 			break;
 			case 4: musicPath = new File("music/BGM-Gam036-Res.wav");
 			break;
-		}
-            if(musicPath.exists()){ 
-                     AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                     Clip clip = AudioSystem.getClip();
-                     clip.open(audioInput);
-                     clip.start();
-                     }
-            else{
-                      System.out.println("Couldn't find Music file");
-                   }
-   }
-   catch (Exception ex){
-              ex.printStackTrace();
-        }
-}}
+			}
+			if(musicPath.exists()){ 
+				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioInput);
+				clip.start();
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+				activeClip = clip;
+				isPlay=true;
+				}
+			else
+				System.out.println("Couldn't find Music file");               
+			}
+		catch (Exception ex){
+			ex.printStackTrace();
+			}
+	}
+}
